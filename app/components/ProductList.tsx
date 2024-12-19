@@ -1,11 +1,22 @@
-import {View} from "react-native";
+import {View, SectionList, SectionListRenderItem} from "react-native";
+import {Product} from "@/app";
 
 interface Props {
-    items: any
+    items: Product[]
+    style: object;
 }
 
-const ProductList = (props: Props) => {
-    return <View></View>
+const ProductList= (props: Props) => {
+
+    const renderItem: SectionListRenderItem<string, Product> = () => {
+        return <View></View>
+    }
+
+    return <View style={props.style}>
+        <SectionList sections={props.items}
+                     renderItem={renderItem}
+        />
+    </View>
 }
 
 export default ProductList

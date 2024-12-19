@@ -1,14 +1,16 @@
-import {Button, StyleSheet, Text, View} from "react-native";
+import {Button, StyleSheet, Text, View, SafeAreaView} from "react-native";
 import {useState} from "react";
 import {BarcodeScanningResult, CameraView, useCameraPermissions} from "expo-camera";
+import PermissionButton from "@/app/components/PermissionButton";
 
 interface Props {
     setItems: any;
+    style: object;
 }
 
-const BScanner = (props: Props) => {
-    const [displayCamera, setDisplayCamera] = useState(false)
-    const [permission, requestPermission] = useCameraPermissions();
+const BarcodeScanner = (props: Props) => {
+    const [permission, ] = useCameraPermissions();
+    const [displayCamera, setDisplayCamera] = useState(permission?.granted)
 
     const onCodeScanned = (code: BarcodeScanningResult) => {
         console.log(`Scanned ${code.data}`)
@@ -17,16 +19,13 @@ const BScanner = (props: Props) => {
 
     if (!permission || !permission.granted) {
         // Camera permissions are not granted yet.
-        return (
-            <View style={styles.container}>
-                <Text style={styles.message}>We need your permission to show the camera</Text>
-                <Button onPress={requestPermission} title="grant permission"/>
-            </View>
-        );
+        return <PermissionButton/>
+    } else if( permission.granted && !displayCamera ) {
+        setDisplayCamera(true)
     }
 
     return (
-        <View style={styles.container}>
+        <View style={props.style}>
             {!displayCamera ?
                 <View>
                     <Text>s</Text>
@@ -55,4 +54,4 @@ const styles = StyleSheet.create({
     camera: {}
 })
 
-export default BScanner
+export default BarcodeScanner
