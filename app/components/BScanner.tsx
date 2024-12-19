@@ -2,7 +2,11 @@ import {Button, StyleSheet, Text, View} from "react-native";
 import {useState} from "react";
 import {BarcodeScanningResult, CameraView, useCameraPermissions} from "expo-camera";
 
-const BScanner = () => {
+interface Props {
+    setItems: any;
+}
+
+const BScanner = (props: Props) => {
     const [displayCamera, setDisplayCamera] = useState(false)
     const [permission, requestPermission] = useCameraPermissions();
 

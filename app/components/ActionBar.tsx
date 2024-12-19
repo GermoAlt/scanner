@@ -1,6 +1,11 @@
 import {View} from "react-native";
 
-const ActionBar = () => {
+interface Props {
+    items: any,
+    setItems: any
+}
+
+const ActionBar = (props: Props) => {
     return <View></View>
 }
 

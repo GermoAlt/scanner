@@ -1,6 +1,10 @@
 import {View} from "react-native";
 
-const ProductList = () => {
+interface Props {
+    items: any
+}
+
+const ProductList = (props: Props) => {
     return <View></View>
 }
 
